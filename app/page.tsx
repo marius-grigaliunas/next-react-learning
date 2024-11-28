@@ -15,18 +15,11 @@ const mockImages = mockImageUrls.map((url, index) => ({
 export default function Home() {
   return (
     <main>
-      <div className="flex justify-center flex-wrap gap-4 pb-6">
-        {mockImages.map((image) => (
-          <div key={image.id} className="w-48">
-            <img src={image.url} />
-          </div>
-        ))}
-      </div>
-      <div className="flex justify-self-center w-11/12 h-5 border-2 border-black bg-orange-500" />
+      <div className="flex justify-self-center w-11/12 h-3 border-2 border-black bg-royal-purple " />
       <div className="p-12">
         <Quiz/>
       </div>
-      <div className="flex justify-self-center w-11/12 h-5 border-2 border-black bg-orange-500" />
+      <div className="flex justify-self-center w-11/12 h-3 border-2 border-black bg-royal-purple" />
     </main>
   );
 }

@@ -22,26 +22,62 @@ export const Quiz = () => {
                 "Pimples",
                 "Acne",
             ],
+            id:3
+        },
+        {
+            question:"Do you have a problem with?",
+            answers: [
+                "Blackheads",
+                "Pimples",
+                "122Acne",
+            ],
+            id:2
+        },
+        {
+            question:"Do you have a problem with?",
+            answers: [
+                "Bla2323ckheads",
+                "Pimples",
+                "Acne",
+            ],
             id:1
-        }
+        },
+        {
+            question:"Do you have a problem with?",
+            answers: [
+                "Blackheads",
+                "Pimples32323",
+                "Acne",
+            ],
+            id:4
+        },
+        {
+            question:"Do you have a problem with?",
+            answers: [
+                "Blackheads1",
+                "Pimples1",
+                "Acne1",
+            ],
+            id:5
+        },
     ]
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
+    const [selectedAnswers, setSelectedAnswers] = useState<string[]>([])
 
 
     const handleAnswerSelection = (answer : string) => {
-        if(selectedAnswer === answer) {
-            setSelectedAnswer(null)
-        }
-        else
-            setSelectedAnswer(answer)
+        setSelectedAnswers(currentAnswers => 
+            currentAnswers.includes(answer)
+            ? currentAnswers.filter(a => a !== answer)
+            : [...currentAnswers, answer]
+        )
     }
     
     const handleNextQuestion = () => {
-        if(selectedAnswer) {
+        if(selectedAnswers) {
             setCurrentQuestionIndex(prev => prev + 1)
-            setSelectedAnswer(null)
+            setSelectedAnswers([])
         }
     }
 
@@ -51,7 +87,7 @@ export const Quiz = () => {
         <div>
             <div key={currentQuestion.id} className='flex justify-center'>
                 <div className='flex w-7/12 pl-5 pr-5 items-center justify-end'>
-                    <h3 className='flex-wrap text-3xl font-bold text-black drop-shadow-md'>{currentQuestion.question}</h3>
+                    <h3 className='flex-wrap text-3xl font-bold text-black drop-shadow-md '>{currentQuestion.question}</h3>
                 </div>
                 <ul className='w-5/12'>
                     {currentQuestion.answers.map((answer) => (
@@ -59,9 +95,9 @@ export const Quiz = () => {
                         key={answer}
                         onClick={() => handleAnswerSelection(answer)}
                         className={`flex border-black border-2 rounded-lg px-10 w-40 my-2
-                        hover:bg-blue-400 hover:text-white
-                         ${selectedAnswer === answer 
-                         ? `bg-blue-500 text-white`
+                        hover:bg-baby-sky hover:text-white
+                         ${selectedAnswers.includes(answer) 
+                         ? `bg-blue-400 text-white`
                          : `bg-inherit text-black`}
                         `}>
                         {answer}
@@ -72,10 +108,11 @@ export const Quiz = () => {
             <div className='flex justify-center '>
                 <button 
                 key={"next"}
+                disabled={selectedAnswers.length === 0}
                 onClick={handleNextQuestion} 
-                className={`border-black border-2 rounded-lg px-6 mt-5 w-40 text-2xl text-white 
-                 ${selectedAnswer
-                 ? `bg-green-700 hover:bg-green-500 hover:border-white`
+                className={`border-black border-2 rounded-full px-6 mt-5 w-30 text-xl text-white 
+                 ${selectedAnswers.length > 0
+                 ? `bg-kinda-tuirquoise hover:bg-l-k-turquoise hover:border-white`
                  : `bg-gray-500 hover:bg-gray-600`}
                 `}>
                 Next
